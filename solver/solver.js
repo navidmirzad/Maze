@@ -12,6 +12,7 @@ document.getElementById("solve").addEventListener("click", startMaze);
 
 function startMaze() {
   buttonDiv.innerHTML = "";
+
   fetchMaze(drawMaze)
     .then(() => {
       depthFirstSearch();
@@ -161,9 +162,11 @@ function visitCell(row, col) {
   return maze[row][col];
 }
 
+const mazeFile = "maze.json";
+
 // async fetch maze from maze.json => and then we draw it from the data we extract
 async function fetchMaze(drawMaze) {
-  const response = await fetch("/solver/maze.json");
+  const response = await fetch(`/solver/mazes/${mazeFile}`);
   data = await response.json();
   console.log(data);
   GRID_WIDTH = data.rows;
